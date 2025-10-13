@@ -1,0 +1,68 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 2.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 15px;
+  border: 3px solid #cd86d1;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #cd86d1;
+  transition: background-color 1s;
+}
+button:hover {
+  background-color: white;
+  border: 3px solid #cd86d1;
+}
+button:disabled {
+  opacity: 60%;
+  background-color: #cd86d1;
+}
+
+input {
+  padding: 5px;
+  padding-left: 13px;
+  padding-right: 13px;
+  background-color: #cd86d1;
+  caret-color: #cd86d1;
+  border-radius: 15px;
+  border: 3px solid #cd86d1;
+  color: black;
+  transition: background-color 1s;
+}
+input:hover {
+  outline: none;
+  background-color: white;
+}
+input:focus-visible {
+  outline: none;
+  border: 3px solid #cd86d1;
+  background-color: white;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background: #bed8e8;
+    /* background: linear-gradient(180deg, rgba(190, 216, 232, 1) 0%, rgba(255, 255, 255, 1) 100%); */
+    background: white;
+    min-height: 100vh;
+  }
+}
+
+@import "tailwindcss";
