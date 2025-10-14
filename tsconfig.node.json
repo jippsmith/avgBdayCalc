@@ -21,6 +21,10 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
+
+    // // Added for MobX what AI told me to add so I did
+    // "experimentalDecorators": true,
+    // "emitDecoratorMetadata": true
   },
   "include": ["vite.config.ts"]
 }

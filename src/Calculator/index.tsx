@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { DaySelector, MonthSelector } from "./BirthdaySelector";
 import ListedNames from "./ListedNames";
 import { PlusIcon } from "lucide-react";
+import BirthdayStore from "../BirthdayStore";
 
 const placeHolder = (word: string): React.ReactNode => <span className="font-normal opacity-50">{word}</span>;
 
@@ -15,6 +16,11 @@ type AddFriendProps = {
 
 function AddFriendButton({ name, month, day, resetFriend }: AddFriendProps) {
   const addFriendDisabled = !name || !month || !day;
+  function addFriend() {
+    BirthdayStore.addBirthday({ name, month, day });
+    resetFriend();
+  }
+
   return (
     <div className="w-sm flex items-center justify-between">
       <div>
@@ -23,7 +29,7 @@ function AddFriendButton({ name, month, day, resetFriend }: AddFriendProps) {
           {month || placeHolder("Month")} {day === 0 ? placeHolder("day") : day}
         </div>
       </div>
-      <button className="p-2 px-5 flex items-center justify-center text-md font-bold" disabled={addFriendDisabled} onClick={resetFriend}>
+      <button className="p-2 px-5 flex items-center justify-center text-md font-bold" disabled={addFriendDisabled} onClick={addFriend}>
         Add friend <PlusIcon className="size-5 text-green-300 ml-1" />
       </button>
     </div>
