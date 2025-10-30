@@ -5,8 +5,12 @@
 
 declare module "sst" {
   export interface Resource {
-    "MyWeb": {
-      "type": "sst.aws.React"
+    "avgBdayCalc": {
+      "type": "sst.aws.StaticSite"
+      "url": string
+    }
+    "avgBdayCalcAPI": {
+      "type": "sst.aws.ApiGatewayV2"
       "url": string
     }
   }

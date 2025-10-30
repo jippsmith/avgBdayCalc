@@ -26,7 +26,7 @@ button {
   transition: background-color 1s;
 }
 button:hover {
-  background-color: white;
+  background-color: transparent;
   border: 3px solid #cd86d1;
 }
 button:disabled {

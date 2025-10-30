@@ -8,11 +8,16 @@
     "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "npx sst dev"
+    "start": "npx sst dev",
+    "deploy": "npx sst deploy --stage=prod"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.920.0",
+    "@aws-sdk/s3-request-presigner": "^3.920.0",
     "@tailwindcss/vite": "^4.1.14",
+    "axios": "^1.13.1",
     "clsx": "^2.1.1",
+    "lambda-api": "^1.2.0",
     "lucide-react": "^0.545.0",
     "mobx": "^6.15.0",
     "mobx-react-lite": "^4.1.1",

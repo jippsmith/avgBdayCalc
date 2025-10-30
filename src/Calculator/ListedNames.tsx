@@ -41,18 +41,21 @@ function BirthdayPlaceholder() {
 }
 
 const ListedNames: React.FC = observer(() => {
-  const { birthdays } = BirthdayStore;
+  const { birthdays, calculateAverage } = BirthdayStore;
   const hasBirthdays = birthdays?.length > 0;
-  const listedBirthdays = hasBirthdays ? (
-    birthdays?.map((b, i) => <BirthdayDetails {...{ ...b, index: i }} key={i} />)
-  ) : (
-    <BirthdayPlaceholder />
-  );
+  const listedBirthdays = hasBirthdays ? birthdays?.map((b, i) => <BirthdayDetails {...{ ...b, index: i }} key={i} />) : null;
+  const placeholder = hasBirthdays ? null : <BirthdayPlaceholder />;
+
   return (
-    <div className="flex flex-col gap-8">
-      <div className="font-extrabold -mb-2 tracking-widest ">Birthdays to be calculated</div>
-      {listedBirthdays}
-      <button className="w-72 p-2 px-5 flex items-center justify-center text-md font-bold" disabled={!hasBirthdays}>
+    <div className="">
+      <div className="mb-8 font-extrabold -mb-2 tracking-widest ">Birthdays to be calculated</div>
+      <div className="flex flex-col gap-6">{listedBirthdays}</div>
+      {placeholder}
+      <button
+        className="mt-8 w-72 p-2 px-5 flex items-center justify-center text-md font-bold"
+        disabled={!hasBirthdays}
+        onClick={calculateAverage}
+      >
         Calculate Average
       </button>
     </div>
