@@ -9,28 +9,29 @@ type Birthday = {
 };
 
 class BirthdayStore {
-  birthdays: Birthday[] = [];
-
   constructor() {
     makeAutoObservable(this);
   }
 
-  addBirthday(entry: Birthday) {
+  birthdays: Birthday[] = [];
+  page: string = "home";
+
+  goToHomePage = () => (this.page = "home");
+  goToCalculatorPage = () => (this.page = "calculator");
+  goToResultPage = () => (this.page = "result");
+
+  addBirthday = (entry: Birthday) => {
     this.birthdays.push(entry);
-  }
+  };
 
-  deleteBirthday(index: number) {
+  deleteBirthday = (index: number) => {
     this.birthdays.splice(index, 1);
-  }
+  };
 
-  async calculateAverage() {
-    const testingBdays = [
-      { month: "Nov", day: 2 },
-      { month: "Dec", day: 27 }
-    ];
-    const response = await axios.post(`${API_URL}/average`);
-    console.log("*******", { API_URL, response });
-  }
+  calculateAverage = async () => {
+    const response = await axios.post(`${API_URL}/average`, { birthdays: this.birthdays });
+    console.log("*******", { response });
+  };
 }
 
 export default new BirthdayStore();

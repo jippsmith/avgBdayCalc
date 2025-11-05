@@ -1,16 +1,17 @@
-import { useState } from "react";
 import Home from "./Home";
 import Calculator from "./Calculator";
+import Result from "./Result";
+import BirthdayStore from "./BirthdayStore";
+import { observer } from "mobx-react-lite";
 
-function App() {
-  const [homePage, setHomePage] = useState(true);
+const App = observer(() => {
+  const { page } = BirthdayStore || {};
 
-  const content = homePage ? <Home setHomePage={setHomePage} /> : <Calculator />;
+  let content = <Home />;
+  if (page === "calculator") content = <Calculator />;
+  if (page === "results") content = <Result />;
 
-  return (
-    // <Home setHomePage={setHomePage} />
-    <>{content}</>
-  );
-}
+  return content;
+});
 
 export default App;

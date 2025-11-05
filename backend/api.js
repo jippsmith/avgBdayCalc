@@ -1,25 +1,23 @@
 import API from "lambda-api";
 import calcluateAverage from "./calculateAverage";
-// import makeBaseAPI from "lambda-api";
 
-// function addCORS(_, res, next) {
-//   res.cors();
-//   next();
-// }
+function addCORS(_, res, next) {
+  res.cors();
+  next();
+}
 
 const api = API();
-// const api = makeBaseAPI({
-//   version: "v2.0",
-//   errorHeaderWhitelist: ["access-control-allow-origin", "access-control-allow-methods", "access-control-allow-headers"]
-// });
 
-// api.use(addCORS);
+api.use(addCORS);
+api.options("*", async (req, res) => {
+  if (req.headers.origin !== "http://localhost:5173") return res.status(500).send(); // (or deployed version)
+  res.status(200).send();
+});
 
 api.post("/average", async (req, res) => {
   const { birthdays } = req?.body || {};
-  console.log({ birthdays });
   try {
-    const result = calcluateAverage();
+    const result = calcluateAverage({ birthdays });
     return res.status(200).json(result);
   } catch (err) {
     console.error(err);

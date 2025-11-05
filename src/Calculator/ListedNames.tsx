@@ -41,10 +41,12 @@ function BirthdayPlaceholder() {
 }
 
 const ListedNames: React.FC = observer(() => {
-  const { birthdays, calculateAverage } = BirthdayStore;
+  const { birthdays, calculateAverage } = BirthdayStore || {};
   const hasBirthdays = birthdays?.length > 0;
   const listedBirthdays = hasBirthdays ? birthdays?.map((b, i) => <BirthdayDetails {...{ ...b, index: i }} key={i} />) : null;
   const placeholder = hasBirthdays ? null : <BirthdayPlaceholder />;
+
+  const calculateAndSeeResults = async () => await calculateAverage();
 
   return (
     <div className="">
@@ -54,7 +56,7 @@ const ListedNames: React.FC = observer(() => {
       <button
         className="mt-8 w-72 p-2 px-5 flex items-center justify-center text-md font-bold"
         disabled={!hasBirthdays}
-        onClick={calculateAverage}
+        onClick={calculateAndSeeResults}
       >
         Calculate Average
       </button>
