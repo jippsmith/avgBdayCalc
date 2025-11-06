@@ -41,12 +41,18 @@ function BirthdayPlaceholder() {
 }
 
 const ListedNames: React.FC = observer(() => {
-  const { birthdays, calculateAverage } = BirthdayStore || {};
+  const { loading, birthdays, calculateAverage, goToResultPage } = BirthdayStore || {};
   const hasBirthdays = birthdays?.length > 0;
   const listedBirthdays = hasBirthdays ? birthdays?.map((b, i) => <BirthdayDetails {...{ ...b, index: i }} key={i} />) : null;
   const placeholder = hasBirthdays ? null : <BirthdayPlaceholder />;
 
-  const calculateAndSeeResults = async () => await calculateAverage();
+  async function calculateAndSeeResults() {
+    await calculateAverage();
+    goToResultPage();
+  }
+  const calculateMessage = loading ? "Calculating..." : "Calculate Average";
+  const hasEnoughBirthdays = birthdays?.length > 1;
+  const calculateDisabled = loading || !hasEnoughBirthdays;
 
   return (
     <div className="">
@@ -55,10 +61,10 @@ const ListedNames: React.FC = observer(() => {
       {placeholder}
       <button
         className="mt-8 w-72 p-2 px-5 flex items-center justify-center text-md font-bold"
-        disabled={!hasBirthdays}
+        disabled={calculateDisabled}
         onClick={calculateAndSeeResults}
       >
-        Calculate Average
+        {calculateMessage}
       </button>
     </div>
   );
