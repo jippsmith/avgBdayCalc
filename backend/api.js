@@ -10,7 +10,12 @@ const api = API();
 
 api.use(addCORS);
 api.options("*", async (req, res) => {
-  if (req.headers.origin !== "http://localhost:5173") return res.status(500).send(); // (or deployed version)
+  if (
+    req.headers.origin !== "http://localhost:5173" &&
+    req.headers.origin !== "https://d2ms8oe4uohvvf.cloudfront.net" &&
+    req.headers.orgin !== "https://avg-bday-calc.vercel.app/"
+  )
+    return res.status(500).send(); // (or deployed version)
   res.status(200).send();
 });
 
